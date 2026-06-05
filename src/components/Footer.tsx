@@ -1,17 +1,19 @@
 import { Instagram, Facebook, Youtube } from 'lucide-react';
+import { Reveal } from './Reveal';
 
 export function Footer() {
   return (
-    <footer className="w-full bg-[#050505] pt-20 pb-10 px-6 border-t border-white/5">
-      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-16 md:gap-8 mb-16">
+    <footer className="w-full bg-[#050505] pt-16 sm:pt-20 pb-10 px-5 sm:px-6 border-t border-white/5">
+      <Reveal direction="up" className="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 sm:gap-16 md:gap-8 mb-16">
         
         {/* Brand Side */}
         <div className="w-full md:w-1/3 flex flex-col items-start text-left shrink-0">
-          <div className="flex items-center gap-3 mb-6">
-            <svg width="28" height="28" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 35L20 5H30L25 15H18L15 25H25L30 35H20L17 25H12L10 35Z" fill="white"/>
-            </svg>
-            <span className="font-heading font-semibold text-lg tracking-[0.15em] uppercase">Reel Legacy</span>
+          <div className="flex items-center mb-6">
+            <img
+              src="/images/logos/logo-white.png"
+              alt="Reel Legacy"
+              className="h-7 w-auto"
+            />
           </div>
           <p className="text-[11px] font-bold tracking-[0.1em] uppercase text-zinc-400 mb-2">
             Built Different.
@@ -74,7 +76,7 @@ export function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       <div className="w-full max-w-7xl mx-auto pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-[9px] font-semibold tracking-[0.1em] text-zinc-600 uppercase">
         <p>© 2026 REEL LEGACY. ALL RIGHTS RESERVED.</p>

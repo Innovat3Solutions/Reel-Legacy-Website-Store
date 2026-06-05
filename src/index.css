@@ -6,6 +6,45 @@
   --font-heading: "Oswald", "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* Avoid horizontal jitter on mobile from off-screen animation start states */
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   @apply bg-black text-white antialiased;
+  /* Subtle, brand-colored tap highlight instead of the default blue flash on mobile */
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hide scrollbars on horizontal carousels while keeping them scrollable (touch + trackpad) */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth, momentum-based horizontal scrolling on touch devices */
+.touch-scroll-x {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Respect users who prefer reduced motion: neutralize transitions & animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

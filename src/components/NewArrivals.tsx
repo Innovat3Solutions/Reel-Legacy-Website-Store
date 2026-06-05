@@ -1,3 +1,6 @@
+import { motion } from 'motion/react';
+import { Reveal } from './Reveal';
+
 const products = [
   {
     id: 1,
@@ -43,22 +46,29 @@ const products = [
 
 export function NewArrivals() {
   return (
-    <section className="w-full py-20 px-6 bg-[#0a0a0a]">
+    <section className="w-full py-16 sm:py-20 px-5 sm:px-6 bg-[#0a0a0a]">
       <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-end justify-between mb-8 text-white">
+        <Reveal direction="up" className="flex items-end justify-between mb-8 text-white">
           <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight uppercase">
             New Arrivals
           </h2>
           <a href="#" className="text-[10px] sm:text-xs font-semibold tracking-[0.1em] uppercase hover:text-zinc-400 transition-colors border-b border-white/30 pb-0.5">
             View All
           </a>
-        </div>
+        </Reveal>
 
-        {/* Carousel/Grid container */}
-        <div className="flex overflow-x-auto hide-scrollbar gap-4 md:gap-6 pb-4 -mx-6 px-6 md:mx-0 md:px-0">
-          {products.map((product) => (
-            <div key={product.id} className="min-w-[260px] md:min-w-0 md:w-1/5 flex-shrink-0 group cursor-pointer">
+        {/* Responsive grid — no horizontal scroll */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 md:gap-x-6">
+          {products.map((product, i) => (
+            <motion.div
+              key={product.id}
+              className="group cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: (i % 5) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+            >
               {/* Image Container */}
               <div className="relative aspect-[4/5] bg-zinc-900 mb-4 overflow-hidden">
                 <img 
@@ -85,7 +95,7 @@ export function NewArrivals() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
