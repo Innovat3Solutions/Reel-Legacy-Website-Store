@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { Reveal } from './Reveal';
 
@@ -27,9 +28,9 @@ export function FeaturedCollection() {
           <p className="text-zinc-400 text-sm md:text-base leading-relaxed mb-8 max-w-sm">
             Timeless style. Unmatched performance. Engineered for those who demand the best from their gear, day in and day out.
           </p>
-          <button className="px-8 py-4 sm:py-3.5 bg-white text-black font-semibold text-[11px] tracking-[0.15em] uppercase hover:bg-zinc-200 active:scale-[0.98] transition-all">
+          <Link to="/shop" className="px-8 py-4 sm:py-3.5 bg-white text-black font-semibold text-[11px] tracking-[0.15em] uppercase hover:bg-zinc-200 active:scale-[0.98] transition-all">
             Shop Now
-          </button>
+          </Link>
         </Reveal>
 
         {/* Expanding tiles — tap one to open the full image, tap again to collapse. Works on mobile + desktop. */}

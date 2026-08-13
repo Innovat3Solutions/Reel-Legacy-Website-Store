@@ -1,8 +1,18 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const navLinks = ['Shop', 'New Arrivals', 'Best Sellers', 'Collections', 'About', 'Legacy'];
+// `to` is the route each nav item links to. Catalog-style links point into the
+// store; pages that don't exist yet fall back to home.
+const navLinks: { label: string; to: string }[] = [
+  { label: 'Shop', to: '/shop' },
+  { label: 'New Arrivals', to: '/shop' },
+  { label: 'Best Sellers', to: '/shop' },
+  { label: 'Collections', to: '/shop' },
+  { label: 'About', to: '/' },
+  { label: 'Legacy', to: '/' },
+];
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,20 +43,20 @@ export function Header() {
         </button>
 
         {/* Logo — centered on mobile, left on desktop */}
-        <div className="flex items-center cursor-pointer group lg:mr-auto">
+        <Link to="/" className="flex items-center cursor-pointer group lg:mr-auto" aria-label="Reel Legacy home">
           <img
             src="/images/logos/logo-white.png"
             alt="Reel Legacy"
             className="h-6 sm:h-7 w-auto transform group-hover:scale-105 transition-transform"
           />
-        </div>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8 text-[11px] font-semibold tracking-[0.15em] text-zinc-300 uppercase">
           {navLinks.map((link) => (
-            <a key={link} href="#" className="hover:text-white transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
-              {link}
-            </a>
+            <Link key={link.label} to={link.to} className="hover:text-white transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-white after:transition-all after:duration-300 hover:after:w-full">
+              {link.label}
+            </Link>
           ))}
         </nav>
 
@@ -104,17 +114,20 @@ export function Header() {
 
               <div className="flex flex-col">
                 {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link}
-                    href="#"
-                    onClick={() => setMenuOpen(false)}
-                    className="text-sm font-semibold tracking-[0.15em] uppercase text-zinc-300 hover:text-white transition-colors py-4 border-b border-white/5"
+                  <motion.div
+                    key={link.label}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.15 + i * 0.06, duration: 0.3 }}
                   >
-                    {link}
-                  </motion.a>
+                    <Link
+                      to={link.to}
+                      onClick={() => setMenuOpen(false)}
+                      className="block text-sm font-semibold tracking-[0.15em] uppercase text-zinc-300 hover:text-white transition-colors py-4 border-b border-white/5"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
 

@@ -1,29 +1,37 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion, type Variants } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { useIntroDone } from '../intro';
 
-const container = {
+const container: Variants = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+    // Slight lead-in so the text lands just after the intro overlay clears.
+    transition: { staggerChildren: 0.12, delayChildren: 0.3 },
   },
 };
 
-const item = {
+const item: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
 };
 
 export function Hero() {
+  const reduce = useReducedMotion();
+  // Hold the text until the full-screen intro video has finished.
+  const introDone = useIntroDone();
+
   return (
-    <section className="relative w-full min-h-[88svh] sm:h-screen sm:min-h-[600px] flex items-center">
-      {/* Background Image with a slow ken-burns zoom */}
+    <section className="relative w-full min-h-[88svh] sm:h-screen sm:min-h-[600px] flex items-center overflow-hidden">
+      {/* Background — the video's final frame, so the intro resolves into it
+          with no visible jump. */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/hero/hero-main.png')" }}
-        initial={{ scale: 1.12 }}
+        style={{ backgroundImage: "url('/images/hero/hero-still.png')" }}
+        initial={{ scale: reduce ? 1 : 1.12 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Gradient Overlay for Text Readability */}
+        {/* Gradient overlays for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       </motion.div>
@@ -32,7 +40,7 @@ export function Hero() {
         className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-6 pt-20"
         variants={container}
         initial="hidden"
-        animate="show"
+        animate={introDone ? 'show' : 'hidden'}
       >
         <div className="max-w-xl">
           <motion.p variants={item} className="text-[11px] sm:text-sm font-semibold tracking-[0.2em] text-zinc-300 uppercase mb-4">
@@ -47,9 +55,9 @@ export function Hero() {
             From sunrise to last cast.
           </motion.p>
           <motion.div variants={item} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-            <button className="w-full sm:w-auto px-8 py-4 sm:py-3.5 bg-white text-black font-semibold text-xs tracking-[0.15em] uppercase hover:bg-zinc-200 active:scale-[0.98] transition-all text-center">
+            <Link to="/shop" className="w-full sm:w-auto px-8 py-4 sm:py-3.5 bg-white text-black font-semibold text-xs tracking-[0.15em] uppercase hover:bg-zinc-200 active:scale-[0.98] transition-all text-center">
               Shop The Collection
-            </button>
+            </Link>
             <button className="w-full sm:w-auto px-8 py-4 sm:py-3.5 bg-transparent border border-white text-white font-semibold text-xs tracking-[0.15em] uppercase hover:bg-white/10 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
               Watch The Film

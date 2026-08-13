@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Youtube } from 'lucide-react';
 import { Reveal } from './Reveal';
 
@@ -37,26 +38,24 @@ export function Footer() {
         <div className="w-full md:w-2/3 flex flex-wrap lg:flex-nowrap justify-between gap-12 text-left">
           <div className="flex flex-col gap-4">
             <h4 className="text-[10px] font-bold tracking-[0.15em] uppercase text-white mb-2">Shop</h4>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">All Products</a>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">New Arrivals</a>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Best Sellers</a>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Collections</a>
+            <Link to="/shop" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">All Products</Link>
+            <Link to="/shop" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">New Arrivals</Link>
+            <Link to="/shop" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Best Sellers</Link>
+            <Link to="/shop" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Collections</Link>
           </div>
-          
+
           <div className="flex flex-col gap-4">
             <h4 className="text-[10px] font-bold tracking-[0.15em] uppercase text-white mb-2">Company</h4>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">About Us</a>
             <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Our Story</a>
             <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Contact</a>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Careers</a>
           </div>
 
           <div className="flex flex-col gap-4">
             <h4 className="text-[10px] font-bold tracking-[0.15em] uppercase text-white mb-2">Support</h4>
             <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">FAQ</a>
             <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Shipping & Returns</a>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Size Guide</a>
-            <a href="#" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Privacy Policy</a>
+            <Link to="/terms" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Terms & Conditions</Link>
+            <Link to="/privacy" className="text-[11px] tracking-[0.05em] text-zinc-500 hover:text-white transition-colors">Privacy Policy</Link>
           </div>
 
           <div className="flex flex-col gap-4 max-w-[200px]">
@@ -81,8 +80,8 @@ export function Footer() {
       <div className="w-full max-w-7xl mx-auto pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-[9px] font-semibold tracking-[0.1em] text-zinc-600 uppercase">
         <p>© 2026 REEL LEGACY. ALL RIGHTS RESERVED.</p>
         <div className="flex gap-4">
-           <a href="#" className="hover:text-zinc-400 transition-colors">Terms</a>
-           <a href="#" className="hover:text-zinc-400 transition-colors">Privacy</a>
+           <Link to="/terms" className="hover:text-zinc-400 transition-colors">Terms</Link>
+           <Link to="/privacy" className="hover:text-zinc-400 transition-colors">Privacy</Link>
         </div>
       </div>
     </footer>
